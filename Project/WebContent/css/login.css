@@ -45,18 +45,6 @@ input, button {
   transition: transform 1.2s ease-in-out; }
   .cont.s--signup .sub-cont {
     transform: translate3d(-640px, 0, 0); }
-.sub-cont1 {
-  overflow: hidden;
-  position: absolute;
-  left: 640px;
-  top: 0;
-  width: 900px;
-  height: 100%;
-  padding-left: 260px;
-  background: #fff;
-  transition: transform 1.2s ease-in-out; }
-  .cont.s--signup .sub-cont {
-    transform: translate3d(-640px, 0, 0); }
 
 button {
   display: block;
@@ -157,8 +145,6 @@ button {
           transform: translateY(0); }
       .cont.s--signup .img__btn span.m--up {
         transform: translateY(72px); }
-      .cont.s--signup1 .img__btn span.m--up {
-        transform: translateY(72px); }
 
 h2 {
   width: 100%;
@@ -167,20 +153,20 @@ h2 {
 
 label {
   display: block;
-  width: 200px;
-  margin: 20px auto 0;
+  width: 260px;
+  margin: 25px auto 0;
   text-align: center; }
   label span {
-    font-size: 11px;
+    font-size: 12px;
     color: #cfcfcf;
     text-transform: uppercase; }
 
 input {
   display: block;
   width: 100%;
-  margin-top: 0px;
+  margin-top: 5px;
   padding-bottom: 5px;
-  font-size: 11px;
+  font-size: 16px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   text-align: center; }
 
@@ -211,11 +197,7 @@ input {
     transform: translate3d(640px, 0, 0); }
 
 .sign-up {
-  padding-top: 3px;
-  transform: translate3d(-1300px, 0, 0); }
-  .cont.s--signup .sign-up {
-    transform: translate3d(0, 0, 0); }
-.sign-up1 {
+	padding-top : 2px;
   transform: translate3d(-900px, 0, 0); }
   .cont.s--signup .sign-up {
     transform: translate3d(0, 0, 0); }
