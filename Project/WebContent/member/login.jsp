@@ -25,16 +25,18 @@ $(document).ready(function() {
 			var spw = $('#pw').val();
 			// 2. 유효성 검사하고
 			if(!sid){
+				alert('올바른 아이디가 아닙니다.')
 				$('#id').focus();
 				return;
 			}
 			if(!spw){
+				alert('올바른 비밀번호가 아닙니다.')
 				$('#pw').focus();
 				return;
 			}
 
 			$('#frm').attr('method', 'POST');
-			$('#frm').attr('action', './loginProc.cls');
+			$('#frm').attr('action', '/Project/member/loginProc.cls');
 			$('#frm').submit();
 		});
 
@@ -56,12 +58,11 @@ $(document).ready(function() {
 		});
 		
 		$('#pbtn').click(function() {
-			alert($('#ab1').val());
-			var abc = $('#idx').val();
-			alert(abc);
 			$('#frm1').attr('method', 'POST');
-			$('#frm1').attr('action', './joinProc.cls');
+			$('#frm1').attr('action', '/Project/member/joinProc.cls');
 			$('#frm1').submit();
+			alert('회원가입을 축하합니다.');
+			
 		});
 		
    });

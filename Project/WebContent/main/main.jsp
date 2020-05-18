@@ -13,9 +13,9 @@
 	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="/Project/assets/css/main.css" />
 		<link rel="stylesheet" href="/Project/css/w3.css" />
-		<script type="text/javascript" src="./js/jquery-3.5.0.min.js"></script>
+		<script type="text/javascript" src="/Project/js/jquery-3.5.0.min.js"></script>
 		
 	</head>
 	<script type="text/javascript">
@@ -57,7 +57,7 @@
 
 							<!-- Header -->
 								<header id="header">
-									<a href="main.jsp" class="logo"><strong>Main page</strong></a>
+									<a href="/Project/main.cls" class="logo"><strong>Main page</strong></a>
 									<ul class="icons">
 									<c:if test="${empty SID}">
 										<li class="btn w3-button" id="login"><b><span>SIGN IN</span></b></a></li>
@@ -189,11 +189,11 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src="/Project/assets/js/jquery.min.js"></script>
+			<script src="/Project/assets/js/browser.min.js"></script>
+			<script src="/Project/assets/js/breakpoints.min.js"></script>
+			<script src="/Project/assets/js/util.js"></script>
+			<script src="/Project/assets/js/main.js"></script>
 			<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=15d6de39e7a3af5142106fbb5ed32293"></script>
 		<script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
