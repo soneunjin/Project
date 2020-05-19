@@ -1,4 +1,4 @@
-package www.team.com.DB;
+package com.team.www.DB;
 
 /**
  * 이 클래스는 커넥션 풀에 있는 커넥션을 이용해서

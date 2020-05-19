@@ -1,10 +1,9 @@
-package www.team.com.controller.member;
+package com.team.www.controller.member;
 
 import javax.servlet.http.*;
 
-import www.team.com.dao.*;
-
-import www.team.com.controller.ClsController;
+import com.team.www.controller.ClsController;
+import com.team.www.dao.*;
 
 public class JoinProc implements ClsController {
 

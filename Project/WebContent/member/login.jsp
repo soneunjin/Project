@@ -19,59 +19,61 @@ $(document).ready(function() {
      })
      
      $('#lbtn').click(function(){
-			// 할일
-			// 1. 데이터 읽고
-			var sid = $('#id').val();
-			var spw = $('#pw').val();
-			// 2. 유효성 검사하고
-			if(!sid){
-				alert('올바른 아이디가 아닙니다.')
-				$('#id').focus();
-				return;
-			}
-			if(!spw){
-				alert('올바른 비밀번호가 아닙니다.')
-				$('#pw').focus();
-				return;
-			}
+         // 할일
+         // 1. 데이터 읽고
+         var sid = $('#id').val();
+         var spw = $('#pw').val();
+         // 2. 유효성 검사하고
+         if(!sid){
+            $('#id').focus();
+            alert('올바른 아이디가 아닙니다.')
+            return;
+         }
+         if(!spw){
+            $('#pw').focus();
+            alert('올바른 비밀번호가 아닙니다.')
+            return;
+         }
 
-			$('#frm').attr('method', 'POST');
-			$('#frm').attr('action', '/Project/member/loginProc.cls');
-			$('#frm').submit();
-		});
+         $('#frm').attr('method', 'POST');
+         $('#frm').attr('action', '/Project/member/loginProc.cls');
+         $('#frm').submit();
+      });
 
-		<%
-			String sid = (String)session.getAttribute("SID");
-		%>
-	
-		// 로그인 여부에 따른 처리
-		var sid = '<%= sid %>';
-		/* alert(typeof sid); */
-		if(sid != 'null' && sid.length != 0 ){
-			$('#loginWin').css('display', 'none');
-			$('#msg').html(sid);
-			$('#msgWin').css('display', '');
-		}
-		
-		$('#hbtn').click(function(){
-			$(location).attr('href', '/Project/main.cls');
-		});
-		
-		$('#pbtn').click(function() {
-			$('#frm1').attr('method', 'POST');
-			$('#frm1').attr('action', '/Project/member/joinProc.cls');
-			$('#frm1').submit();
-			alert('회원가입을 축하합니다.');
-			
-		});
-		
+      <%
+         String sid = (String)session.getAttribute("SID");
+      %>
+   
+      // 로그인 여부에 따른 처리
+      var sid = '<%= sid %>';
+      /* alert(typeof sid); */
+      if(sid != 'null' && sid.length != 0 ){
+         $('#loginWin').css('display', 'none');
+         $('#msg').html(sid);
+         $('#msgWin').css('display', '');
+      }
+      
+      $('#hbtn').click(function(){
+         $(location).attr('href', '/Project/main.cls');
+      });
+      
+      $('#pbtn').click(function() {
+         $('#frm1').attr('method', 'POST');
+         $('#frm1').attr('action', '/Project/member/joinProc.cls');
+         $('#frm1').submit();
+         
+      });
+      
+ 
+      
+      
    });
 </script>
 </head>
 <body>
    <p class="tip" id="hbtn">Home</p>
 <div class="cont">
-	<form id="frm" name="frm">
+   <form id="frm" name="frm">
   <div class="form sign-in">
     <h2>어서 오세용 드루왕</h2>
     <label>
@@ -82,7 +84,7 @@ $(document).ready(function() {
       <span for="pw">비밀번호</span>
       <input type="password" id="pw" name="pw" />
     </label>
-	</form>
+   </form>
     <p class="forgot-pass">Forgot password?</p>
     <button type="button" class="submit" id="lbtn">Sign In</button>
     <button type="button" class="fb-btn">Connect with <span>facebook</span></button>
@@ -103,7 +105,7 @@ $(document).ready(function() {
       </div>
     </div>
     <form id="frm1" name="frm1">
-    <div class="form sign-up">
+    <div class="form sign-up ">
       <label><span>이메일</span>
         <input type="email" name="email" id="email">
       </label>
@@ -123,8 +125,8 @@ $(document).ready(function() {
         <input type="text" name="birth" id="birth">
       </label>
       <br>
-      		<center><span>차량 선택 : </span>
-      		<select name="opt" style="margin: 10px;">
+            <center><span>차량 선택 : </span>
+            <select name="opt" style="margin: 10px;">
                            <option value="1" id="ab1">소형</option>
                            <option value="2" id="ab2">경형</option>
                            <option value="3" id="ab3">준중형</option>
@@ -134,18 +136,10 @@ $(document).ready(function() {
                            <option value="7" id="ab7">스포츠카</option>
                            <option value="8" id="ab8">기타</option>
                         </select>
-             </center>
+              </center>
       <button type="button" class="submit" id='pbtn'>Sign Up</button>
+      </div>
       </form>
     </div>
-  </div>
-</div>
-
-<a href="https://dribbble.com/shots/3306190-Login-Registration-form" target="_blank" class="icon-link">
-  <img src="http://icons.iconarchive.com/icons/uiconstock/socialmedia/256/Dribbble-icon.png">
-</a>
-<a href="https://twitter.com/NikolayTalanov" target="_blank" class="icon-link icon-link--twitter">
-  <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png">
-</a>
 </body>
 </html>

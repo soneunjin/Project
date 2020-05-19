@@ -57,7 +57,7 @@
 
 							<!-- Header -->
 								<header id="header">
-									<a href="/Project/main.cls" class="logo"><strong>Main page</strong></a>
+									<a href="/Project/main/main.jsp" class="logo"><strong>Main page</strong></a>
 									<ul class="icons">
 									<c:if test="${empty SID}">
 										<li class="btn w3-button" id="login"><b><span>SIGN IN</span></b></a></li>
@@ -139,16 +139,15 @@
 								<nav id="menu">
 									<header class="major">
 							   			<a href="/Project/main.jsp" width="0px;" height="0px;">
-							   			<img class="ima_1" src="images/main.png" border="0" />
+							   			<img class="ima_1" src="/Project/images/main.png" border="0" />
 							   			</a>
 										<h2>Manu</h2>
 									</header>
 									<ul>
-										<li><a href="index.html">메인 페이지</a></li>
-										<li><a href="generic.html">홍보 게시판</a></li>
-										<li><a href="elements.html">자유게시판</a></li>
+										<li><a href="/Project/main.cls">모른당X</a></li>
+										<li><a href="/Project/sales/sales.jsp">팝니당$</a></li>
 										<li>
-											<span class="opener">위치 정보</span>
+											<span class="opener">오세용~</span>
 											<ul>
 												<li><a href="#">음식점</a></li>
 												<li><a href="#">자동차 극장</a></li>
@@ -157,8 +156,8 @@
 												<li><a href="#"></a></li>
 											</ul>
 										</li>
-										<li><a href="#">문의 사항</a></li>
-										<li><a href="#">공지 사항</a></li>
+										<li><a href="/Project/qna/qnaList.jsp">놀러왕!</a></li>
+										<li><a href="/Project/board/board.jsp">물어봥?</a></li>
 										<!--
 										<li>
 											 <span class="opener">Another Submenu</span>
@@ -173,6 +172,7 @@
 										<li><a href="#">Sapien Mauris</a></li>
 										<li><a href="#">Amet Lacinia</a></li>
 									</ul> -->
+									</ul>
 								</nav>
 
 							<!-- Section -->

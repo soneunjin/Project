@@ -1,10 +1,10 @@
-package www.team.com.dao;
+package com.team.www.dao;
 
 import java.sql.*;
-import www.team.com.DB.*;
-import www.team.com.sql.*;
-import www.team.com.vo.*;
-import www.team.com.sql.*;
+
+import com.team.www.DB.*;
+import com.team.www.sql.*;
+import com.team.www.vo.*;
 
 
 public class MemberDAO {

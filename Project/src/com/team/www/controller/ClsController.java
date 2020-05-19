@@ -1,4 +1,4 @@
-package www.team.com.controller;
+package com.team.www.controller;
 
 /**
  * 이 클래스는 디스패치 컨트롤러에서 요청을 처리할 때 사용할 클래스들의 

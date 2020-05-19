@@ -32,7 +32,7 @@
 				<!-- Header -->
 				<header id="header">
 				  
-                           <a href="index.jsp" class="logo"><strong>Main page</strong></a>
+                           <a href="/Project/main.cls" class="logo"><strong>Main page</strong></a>
                            <ul class="icons">
                               <li><a href="/Project/login.jsp" class="w3-col"><b><span>SIGN IN</span></b></a></li>
                            </ul>
@@ -112,33 +112,60 @@
 		</div>
 		<!-- Sidebar -->
 		<div id="sidebar">
-			<div class="inner">
+						<div class="inner">
+							<!-- 
+							<!-- Main link -->
+	
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+							   			<a href="/Project/main/main.jsp" width="0px;" height="0px;">
+							   			<img class="ima_1" src="/Project/images/main.png" border="0" />
+							   			</a>
+										<h2>Manu</h2>
+									</header>
+									<ul>
+										<li><a href="/Project/main.cls">모른당X</a></li>
+										<li><a href="/Project/sales/sales.jsp">팝니당$</a></li>
+										<li>
+											<span class="opener">오세용~</span>
+											<ul>
+												<li><a href="#">음식점</a></li>
+												<li><a href="#">자동차 극장</a></li>
+												<li><a href="#">자동차 캠핌장</a></li>
+												<li><a href="#">주차장 정보</a></li>
+												<li><a href="#"></a></li>
+											</ul>
+										</li>
+										<li><a href="/Project/qna/qnaList.jsp">놀러왕!</a></li>
+										<li><a href="/Project/board/board.jsp">물어봥?</a></li>
+										<!--
+										<li>
+											 <span class="opener">Another Submenu</span>
+											<ul>
+												<li><a href="#">Lorem Dolor</a></li>
+												<li><a href="#">Ipsum Adipiscing</a></li>
+												<li><a href="#">Tempus Magna</a></li>
+												<li><a href="#">Feugiat Veroeros</a></li>
+											</ul>
+										</li>
+										<li><a href="#">Maximus Erat</a></li>
+										<li><a href="#">Sapien Mauris</a></li>
+										<li><a href="#">Amet Lacinia</a></li>
+									</ul> -->
+									</ul>
+								</nav>
 
-				<!-- Search -->
+							<!-- Section -->
+								<section>
+									<header class="major">
+									</header>
+								</section>
 
+							<!-- Section -->
 
-				<!-- Menu -->
-				<nav id="menu">
-					<header class="major w3-padding-top">
-						<img class="dtlogo" src="../images/logo.png" width="300px"
-							height="auto"> <a href="main.jsp"><h2>menu</h2></a>
-					</header>
-					<ul>
-						<li><a href="index.html">모른당X</a></li>
-						<li><a href="elements.html">팝니당$</a></li>
-						<li><span class="opener">오세용~</span>
-							<ul>
-								<li><a href="#">자동차극장</a></li>
-								<li><a href="#">자동차캠핑</a></li>
-								<li><a href="#">선별진료소</a></li>
-							</ul></li>
-						<li><a onclick="">놀러왕!</a></li>
-						<li><a href="#">물어봥?</a></li>
-
-					</ul>
-				</nav>
-			</div>
-		</div>
+						</div>
+					</div>
 	</div>
 
 </body>

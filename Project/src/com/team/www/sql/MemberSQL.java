@@ -1,4 +1,4 @@
-package www.team.com.sql;
+package com.team.www.sql;
 
 public class MemberSQL {
 	public final int SEL_LOGIN_CNT = 1001;

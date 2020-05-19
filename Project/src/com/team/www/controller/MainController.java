@@ -1,4 +1,4 @@
-package www.team.com.controller;
+package com.team.www.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

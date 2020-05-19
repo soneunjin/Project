@@ -1,8 +1,8 @@
-package www.team.com.controller.member;
+package com.team.www.controller.member;
 
 import javax.servlet.http.*;
 
-import www.team.com.controller.ClsController;
+import com.team.www.controller.ClsController;
 
 public class JoinForm implements ClsController {
 

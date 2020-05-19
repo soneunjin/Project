@@ -1,4 +1,4 @@
-package www.team.com.dispatch;
+package com.team.www.dispatch;
 
 /**
  * 이 클래스는 확장자가 cls로 요청이 되는 경우 Dispatch시킬 서블릿 클래스이다.
@@ -15,7 +15,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
-import www.team.com.controller.*;
+import com.team.www.controller.*;
 
 import java.io.*;
 import java.util.*;

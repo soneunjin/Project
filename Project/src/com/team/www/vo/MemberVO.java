@@ -1,4 +1,4 @@
-package www.team.com.vo;
+package com.team.www.vo;
 
 import java.sql.*;
 import java.text.*;
