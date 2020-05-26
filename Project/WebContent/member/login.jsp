@@ -53,10 +53,12 @@ $(document).ready(function() {
          $('#msgWin').css('display', '');
       }
       
+      // 홈 버튼 처리
       $('#hbtn').click(function(){
          $(location).attr('href', '/Project/main.cls');
       });
       
+      //로그인 처리
       $('#pbtn').click(function() {
          $('#frm1').attr('method', 'POST');
          $('#frm1').attr('action', '/Project/member/joinProc.cls');
@@ -64,14 +66,36 @@ $(document).ready(function() {
          
       });
       
- 
+      // 아이디 찾기
+      $('#findid').click(function(){
+    	  $(location).attr('href','/Project/member/id_find.jsp');
+      })
       
+      // 비밀번호 찾기
+      $('#findpw').click(function (){
+    	  $(location).attr('href','/Project/member/passFind.jsp');
+      })
       
+      /*
+      $('#findid').mouseover(function(){
+    		$('#findid').addClass('overcolor');
+    		$('#findid').mouseout(function(){
+    			$('#findid').removeClass('overcolor');
+    		})
+      })
+      $('#findpw').mouseover(function(){
+    		$('#findpw').addClass('overcolor');
+    		$('#findpw').mouseout(function(){
+    			$('#findpw').removeClass('overcolor');
+    		})
+      })
+      */
+    
    });
 </script>
 </head>
 <body>
-   <p class="tip" id="hbtn">Home</p>
+   <p class="tip" id="hbtn">집으로 !!</p>
 <div class="cont">
    <form id="frm" name="frm">
   <div class="form sign-in">
@@ -84,20 +108,26 @@ $(document).ready(function() {
       <span for="pw">비밀번호</span>
       <input type="password" id="pw" name="pw" />
     </label>
-   </form>
-    <p class="forgot-pass">Forgot password?</p>
+   </form>   
+    <center>
+   <div style="width: 138px;">
+    <a href="#" style="text-decoration: none;"><p id="findpw" class="forgot-pass" style=" font-size: 12pt; font-family: Gentium Book Basic, Baekmuk Gentium Book Basic, UnGentium Book Basic, Apple Gothic, Latin font, sans-serif; " >Forgot password?</p></a>
+    </div>
+      <div style="width: 85px;">
+    <a href="#" style="text-decoration: none;"><p id="findid" class="forgot-pass" style=" font-size: 12pt; font-family: Gentium Book Basic, Baekmuk Gentium Book Basic, UnGentium Book Basic, Apple Gothic, Latin font, sans-serif; " >Forgot id?</p></a>
+      </div>
+      </center>
     <button type="button" class="submit" id="lbtn">Sign In</button>
-    <button type="button" class="fb-btn">Connect with <span>facebook</span></button>
   </div>
   <div class="sub-cont">
     <div class="img">
       <div class="img__text m--up">
-        <h2>New here?</h2>
-        <p>Sign up and discover great amount of new opportunities!</p>
+        <h2>새로 가입할랭?</h2>
+        <p>가입을 원하면 Sign up!</p>
       </div>
       <div class="img__text m--in">
-        <h2>One of us?</h2>
-        <p>If you already has an account, just sign in. We've missed you!</p>
+        <h2>로그인 할랭?</h2>
+        <p>준비가 됬으면 Sign In!</p>
       </div>
       <div class="img__btn">
         <span class="m--up">Sign Up</span>
@@ -118,8 +148,8 @@ $(document).ready(function() {
       <label><span>이름</span>
         <input type="text" name="idx" id="idx">
       </label>
-      <label><span>사업자번호</span>
-        <input type="text" name="bno" id="bno">
+      <label><span>핸드폰번호</span>
+        <input type="text" name="phone" id="phone">
       </label>
       <label><span>생년월일</span>
         <input type="text" name="birth" id="birth">

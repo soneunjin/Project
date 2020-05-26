@@ -21,6 +21,7 @@ public class LoginProc implements ClsController {
 		if(cnt == 1) {
 			HttpSession session = req.getSession();
 			session.setAttribute("SID", sid);
+			session.setAttribute("SPW", spw);
 		} else {
 			view = "/Project/member/login.cls";
 		}

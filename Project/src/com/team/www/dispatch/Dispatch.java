@@ -95,15 +95,25 @@ public class Dispatch extends HttpServlet {
 		//System.out.println("######### realPath : " + realPath);
 		req.setAttribute("isRedirect", false);
 		String view = cls.exec(req, resp);
-		boolean bool = (boolean) req.getAttribute("isRedirect");
-		if(bool) {
+		Boolean bool;
+		try {
+			bool = (boolean) req.getAttribute("isRedirect");
+		} catch(Exception e) {
+			bool = null;
+		}
+		if(bool == null) {
+			PrintWriter pw = resp.getWriter();
+			try {
+				pw.println(view);
+			} catch(Exception e) {}
+		} else if (bool == true) {
 		/*
 		String last = view.substring(view.lastIndexOf(".") + 1);
 		if(last.equals("cls")) {
 			
 		*/
 			resp.sendRedirect(view);
-		} else {
+		} else { 
 			try {
 				RequestDispatcher rd = req.getRequestDispatcher(view);
 				rd.forward(req, resp);

@@ -1,10 +1,14 @@
 package com.team.www.dao;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
-import com.team.www.DB.*;
-import com.team.www.sql.*;
-import com.team.www.vo.*;
+import com.team.www.DB.WebDBCP;
+import com.team.www.sql.MemberSQL;
+import com.team.www.vo.MemberVO;
 
 
 public class MemberDAO {
@@ -48,7 +52,8 @@ public class MemberDAO {
 		return cnt;
 	}
 	
-	public int addMember(String id, String pw, String bno, String name, int membir, int carno) {
+	// 회원가입 DB 처리 전담 함수
+	public int addMember(String id, String pw,String phone, String name, String membir, int carno) {
 		int cnt = 0;
 		con = db.getCon();
 		String sql = mSQL.getSQL(mSQL.ADD_DATA);
@@ -57,9 +62,9 @@ public class MemberDAO {
 		try {
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
-			pstmt.setString(3, bno);
+			pstmt.setString(3, phone);
 			pstmt.setString(4, name);
-			pstmt.setInt(5, membir);
+			pstmt.setString(5, membir);
 			pstmt.setInt(6, carno);
 			
 			cnt = pstmt.executeUpdate();
@@ -72,4 +77,191 @@ public class MemberDAO {
 		
 		return cnt;
 	}
+	
+	// 아이디 찾기 처리 전담 함수
+	public String id_find(String name, String phone) {
+		String user_id = null;
+		con = db.getCon();
+		String sql = mSQL.getSQL(mSQL.SEL_ID_FIND);
+		pstmt = db.getPSTMT(con, sql);
+		
+		try {
+			pstmt.setString(1, name);
+			pstmt.setString(2, phone);
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			user_id = rs.getString("memid");
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		return user_id;
+	}
+	// 비밀번호 찾기 처리 전담 함수
+	public String pasFind(String name, String memid) {
+		String pass = null;
+		con = db.getCon();
+		String sql = mSQL.getSQL(mSQL.SEL_PW_FIND);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			pstmt.setString(1, name);
+			pstmt.setString(2, memid);
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			pass = rs.getString("mempw");
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		return pass;
+	}
+	
+	// 임시 비밀번호 변경 처리 전담 함수
+	public int passFind(String mempw,String memid, String name) {
+		int cnt = 0;
+		con = db.getCon();
+		String sql = mSQL.getSQL(mSQL.EIDT_PW_DATA);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			pstmt.setString(1, mempw);
+			pstmt.setString(2, memid);
+			pstmt.setString(3, name);
+			
+			cnt = pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		
+		return cnt;
+	}
+	// 비밀번호 변경 처리 전담 함수
+	public int passEidt(String mempw,String memid) {
+		int cnt = 0;
+		con = db.getCon();
+		String sql = mSQL.getSQL(mSQL.EIDT_PWE_DATA);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			pstmt.setString(1, mempw);
+			pstmt.setString(2, memid);
+			
+			cnt = pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		
+		return cnt;
+	}
+	
+	// 사원아이디로 사원 정보를 가져오는 전담 처리 함수
+	public MemberVO info(String memid) {
+		MemberVO mVO = new MemberVO();
+		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
+		con = db.getCon();
+		String sql = mSQL.getSQL(mSQL.SEL_INFO);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			pstmt.setString(1, memid);
+			System.out.println(memid);
+			rs = pstmt.executeQuery();
+			rs.next();
+			mVO.setMemid(rs.getString("memid"));
+			mVO.setName(rs.getString("name"));
+			mVO.setPhone(rs.getString("phone"));
+			mVO.setMembir(rs.getString("membir"));
+			mVO.setCarno(rs.getInt("carno"));
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(pstmt);
+			db.close(con);
+		}
+		return mVO;
+	}
+	
+	// 회원 정보 수정 처리 전담 함수
+	public int EIDT_INFO(String memid, String phone, int carno) {
+		int cnt = 0;
+		con = db.getCon();
+		String sql = mSQL.getSQL(mSQL.EIDT_INFO_DATA);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			pstmt.setString(3, memid);
+			System.out.println(memid);
+			pstmt.setString(1, phone);
+			System.out.println(phone);
+			pstmt.setInt(2, carno);
+			System.out.println(carno);
+			
+			cnt = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(pstmt);
+			db.close(con);
+		}
+		return cnt;
+	}
+	
+	// 비밀번호 카운트 처리 전담 함수
+	public int SEL_COUNT(String memid, String mempw) {
+		int cnt = 0;
+		con = db.getCon();
+		String sql = mSQL.getSQL(mSQL.SEL_COUNT);
+		pstmt = db.getPSTMT(con, sql);
+		try {
+			pstmt.setString(1, memid);
+			pstmt.setString(2, mempw);
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			cnt = rs.getInt("cnt");
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return cnt;
+	}
+	
+	public ArrayList<MemberVO> getTen() {
+		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
+		
+		con = db.getCon();
+		String sql = mSQL.getSQL(mSQL.SEL_TEN);
+		stmt = db.getSTMT(con);
+		try {
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				MemberVO mVO = new MemberVO();
+				mVO.setBname(rs.getString("bname"));
+				mVO.setRd(rs.getDouble("rd"));
+				list.add(mVO);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(stmt);
+			db.close(con);
+		}
+		return list;
+	}
+	
 }

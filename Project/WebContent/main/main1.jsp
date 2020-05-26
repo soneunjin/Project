@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="/Project/assets/css/main.css" />
 		<link rel="stylesheet" href="/Project/css/w3.css" />
 		<link rel="stylesheet" href="/Project/css/map1.css" />
+		<link rel="stylesheet" href="/Project/css/login1.css">
 		<script type="text/javascript" src="/Project/js/jquery-3.5.0.min.js"></script>
 		<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bfbcb2a9b1a94611a8804b0d71d6315c&libraries=services"></script>
 	</head>
@@ -24,7 +25,6 @@
 		});
 		*/
 		
-		
 		$('.btn').click(function() {
 			var tid = $(this).attr('id');
 			var url = '';
@@ -37,9 +37,13 @@
 			$(location).attr('href', url);
 		});
 		
+		
+		$('#lbtn').click(function() {
+			$('#frm').submit();
+		});
+		
 		$('#mypage').click(function () {
 			$(location).attr('href','/Project/member/InFoProc.cls');
-			alert('왔어요?');
 		});
 		
 	});
@@ -73,18 +77,7 @@
 
 							<!-- Banner -->
 								<section id="banner">
-									<div class="" style="overflow:scroll; width:400px; height: 500px; padding:10px; position:relative;">
-									        <div class="option">
-									            <div>
-									                <form onsubmit="searchPlaces(); return false;">
-									                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15"> 
-									                    <button type="submit">검색하기</button> 
-									                </form>
-									            </div>
-									        </div>
-									        <hr>
-									        <ul id="placesList"></ul>
-									        <div id="pagination"></div>
+										
 									    <!-- 
     									<div id="menu_wrap" class="bg_white">
 									    </div>
@@ -104,36 +97,47 @@
 										<ul class="actions">
 											<li><a href="#" class="button big">Learn More</a></li>
 										 -->
-									</div>
+					
 									
-									
+									<FORM method="post" action="/Project/member/EditInfo.cls" id="frm" name="frm">
 									<span class="image object">
-										<div class="map_wrap">
-										    <div id="map" style="width:850px;height:500px;position:relative;overflow:hidden;"></div>
-										   
-									</div>
+										<div class="cont">
+										  <div class="form sign-in">
+										    <h2>내 정보 수정</h2>
+										    <label>
+										      <span for="id">이메일</span>
+										      <input id="memid" name="memid" type="text" value="${DATA.memid}" readonly>
+										    </label>
+										    <label>
+										      <span for="name">이름</span>
+										      <input type="text" value="${DATA.name}" readonly>
+										    </label>
+										    <label>
+										      <span for="phone">핸드폰번호</span>
+										      <input  id="phone" name="phone" type="text" placeholder="${DATA.phone}">
+										    </label>
+										    <label>
+										      <span for="membir">생년월일 : </span>
+										      <input type="text" value="${DATA.membir}" readonly>
+										    </label>
+										    <label>
+										      	<select name="opt" style="margin: 0px;">
+	                           					   <option value="1" id="ab1">소형</option>
+						                           <option value="2" id="ab2">경형</option>
+						                           <option value="3" id="ab3">준중형</option>
+						                           <option value="4" id="ab4" >중형</option>
+						                           <option value="5" id="ab5">준대형</option>
+						                           <option value="6" id="ab6">대형</option>
+						                           <option value="7" id="ab7">스포츠카</option>
+						                           <option value="8" id="ab8">기타</option>
+					                        	</select>
+										    </label>
+										
+										    <button type="button" class="submit" id="lbtn">Submit</button>
+										  </div>
+										  </div>   
 									</span>
-									
-									 
-									<div class="" style="overflow:scroll; width:300px; height: 400px; padding:10px;">
-										<header>
-											<h2> 탑 10 음식점 추천<br /></h2>
-											<p></p>
-										</header>
-										<c:forEach var="data" items="${LIST}">
-										<p> <br>
-										   ${data.bname} <br>
-										   ${data.rd} <br>
-										 </p>
-										</c:forEach>
-									 	
-										<!-- 
-										<ul class="actions">
-											<li><a href="#" class="button big">Learn More</a></li>
-										 -->
-										</ul>
-									</div>	
-									
+									</FORM>
 
 
 										<!-- <img src="images/pic10.jpg" alt="" /> -->
@@ -211,7 +215,7 @@
 			<script src="/Project/assets/js/util.js"></script>
 			<script src="/Project/assets/js/main.js"></script>
 			
-		<script>
+<script>
 		var markers = [];
 
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

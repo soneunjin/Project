@@ -4,20 +4,35 @@ import java.sql.*;
 import java.text.*;
 
 public class MemberVO {
-	private int memno, membir, carno;
-	private String memid, mempw, bno, name, sDate;
+	private int memno, carno;
+	private double rd;
+	private String memid, mempw, bno, name, phone, sDate, membir, bname;
 	private Date joinDate;
 	private Time joinTime;
+	
+	
+	public double getRd() {
+		return rd;
+	}
+	public void setRd(double rd) {
+		this.rd = rd;
+	}
+	public String getBname() {
+		return bname;
+	}
+	public void setBname(String bname) {
+		this.bname = bname;
+	}
 	public int getMemno() {
 		return memno;
 	}
 	public void setMemno(int memno) {
 		this.memno = memno;
 	}
-	public int getMembir() {
+	public String getMembir() {
 		return membir;
 	}
-	public void setMembir(int membir) {
+	public void setMembir(String membir) {
 		this.membir = membir;
 	}
 	public int getCarno() {
@@ -37,6 +52,13 @@ public class MemberVO {
 	}
 	public void setMempw(String mempw) {
 		this.mempw = mempw;
+	}
+	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public String getBno() {
 		return bno;

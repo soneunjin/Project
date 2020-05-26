@@ -1,3 +1,5 @@
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -9,6 +11,7 @@
 		<link rel="stylesheet" href="/Project/assets/css/main.css" />
 		<link rel="stylesheet" href="/Project/css/w3.css" />
 		<link rel="stylesheet" href="/Project/css/map1.css" />
+		<link rel="stylesheet" href="/Project/css/login1.css">
 		<script type="text/javascript" src="/Project/js/jquery-3.5.0.min.js"></script>
 		<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bfbcb2a9b1a94611a8804b0d71d6315c&libraries=services"></script>
 	</head>
@@ -23,8 +26,6 @@
 			$(location).attr('href', '/clsProj/member/logoutProc.cls');
 		});
 		*/
-		
-		
 		$('.btn').click(function() {
 			var tid = $(this).attr('id');
 			var url = '';
@@ -37,9 +38,10 @@
 			$(location).attr('href', url);
 		});
 		
-		$('#mypage').click(function () {
-			$(location).attr('href','/Project/member/InFoProc.cls');
-			alert('왔어요?');
+	
+		$('#lbtn').click(function() {
+			$('#frm').submit();
+			
 		});
 		
 	});
@@ -62,7 +64,7 @@
 										<li class="btn w3-button" id="login"><b><span>SIGN IN</span></b></li>
 									</c:if>
 									<c:if test="${not empty SID}">
-										<li class="btn" id="mypage"><b><span>회원 정보</span></b></li></a>
+										<a href="/Project/main/main1.jsp"><li class="btn" id="mypage"><b><span>회원 정보</span></b></li></a>
 										<a href="/Project/main/main3.jsp"><li class="btn" id="binfo"><b><span>사업자 정보</span></b></li></a>
 										<a href="/Project/main/main2.jsp"><li class="btn" id="pwModi"><b><span>비밀번호 변경</span></b></li></a>
 										<li class="btn" id="logout"><b><span>SIGN OUT</span></b></li>
@@ -73,18 +75,7 @@
 
 							<!-- Banner -->
 								<section id="banner">
-									<div class="" style="overflow:scroll; width:400px; height: 500px; padding:10px; position:relative;">
-									        <div class="option">
-									            <div>
-									                <form onsubmit="searchPlaces(); return false;">
-									                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15"> 
-									                    <button type="submit">검색하기</button> 
-									                </form>
-									            </div>
-									        </div>
-									        <hr>
-									        <ul id="placesList"></ul>
-									        <div id="pagination"></div>
+										
 									    <!-- 
     									<div id="menu_wrap" class="bg_white">
 									    </div>
@@ -104,36 +95,32 @@
 										<ul class="actions">
 											<li><a href="#" class="button big">Learn More</a></li>
 										 -->
-									</div>
+					
 									
 									
 									<span class="image object">
-										<div class="map_wrap">
-										    <div id="map" style="width:850px;height:500px;position:relative;overflow:hidden;"></div>
-										   
-									</div>
+										<div class="cont">
+										   <form method="post" action="/Project/member/PassEdit.cls" id="frm" name="frm">
+										  <div class="form sign-in">
+										    <h2>내 정보 수정</h2>
+										    <label>
+										      <span for="id">기존비밀번호</span>
+										      <input type="password" id="gpw" name="gpw" />
+										    </label>
+										    <label>
+										      <span for="pw">새비밀번호</span>
+										      <input type="password" id="pw" name="pw" />
+										    </label>
+										    <label>
+										      <span for="pw">새비밀번호 확인</span>
+										      <input type="password" id="pwe" name="pwe" />
+										    </label>
+										
+										    <button type="button" class="submit" id="lbtn">Submit</button>
+										  </div>
+										   </form>
+										  </div>   
 									</span>
-									
-									 
-									<div class="" style="overflow:scroll; width:300px; height: 400px; padding:10px;">
-										<header>
-											<h2> 탑 10 음식점 추천<br /></h2>
-											<p></p>
-										</header>
-										<c:forEach var="data" items="${LIST}">
-										<p> <br>
-										   ${data.bname} <br>
-										   ${data.rd} <br>
-										 </p>
-										</c:forEach>
-									 	
-										<!-- 
-										<ul class="actions">
-											<li><a href="#" class="button big">Learn More</a></li>
-										 -->
-										</ul>
-									</div>	
-									
 
 
 										<!-- <img src="images/pic10.jpg" alt="" /> -->
