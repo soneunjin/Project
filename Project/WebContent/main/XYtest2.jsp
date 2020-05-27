@@ -28,6 +28,7 @@ var x,y = "";
 map = new daum.maps.Map(mapContainer, mapOption);
 
  // 주소-좌표 변환 객체를 생성
+ // 주소로 좌표를 검색
  var geocoder = new daum.maps.services.Geocoder();
 
  var positions = [
@@ -50,7 +51,6 @@ map = new daum.maps.Map(mapContainer, mapOption);
 	];
 
    for (var i = 0; i < positions.length; i ++) {
- // 주소로 좌표를 검색
  geocoder.addressSearch(positions[i].addr, function(result, status) {
   
   // 정상적으로 검색이 완료됐으면,
@@ -72,7 +72,7 @@ map = new daum.maps.Map(mapContainer, mapOption);
 	    });
 
 	   // 인포윈도우로 장소에 대한 설명표시
-	   var infowindow = new daum.maps.InfoWindow({
+	   var infowindow = new kkao.maps.InfoWindow({
 	    content: positions[i].content
 	   });
 	

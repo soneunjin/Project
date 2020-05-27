@@ -10,111 +10,31 @@
 <link rel="stylesheet" href="/Project/css/login.css">
 
 <script type="text/javascript" src="/Project/js/jquery-3.5.0.min.js"></script>
+<script type="text/javascript" src="/Project/js/login.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
-   document.querySelector('.img__btn').addEventListener('click', function(){
-      
-   
-     document.querySelector('.cont').classList.toggle('s--signup');
-     })
-     
-     $('#lbtn').click(function(){
-         // 할일
-         // 1. 데이터 읽고
-         var sid = $('#id').val();
-         var spw = $('#pw').val();
-         // 2. 유효성 검사하고
-         if(!sid){
-            $('#id').focus();
-            alert('올바른 아이디가 아닙니다.')
-            return;
-         }
-         if(!spw){
-            $('#pw').focus();
-            alert('올바른 비밀번호가 아닙니다.')
-            return;
-         }
-
-         $('#frm').attr('method', 'POST');
-         $('#frm').attr('action', '/Project/member/loginProc.cls');
-         $('#frm').submit();
-      });
-
-      <%
-         String sid = (String)session.getAttribute("SID");
-      %>
-   
-      // 로그인 여부에 따른 처리
-      var sid = '<%= sid %>';
-      /* alert(typeof sid); */
-      if(sid != 'null' && sid.length != 0 ){
-         $('#loginWin').css('display', 'none');
-         $('#msg').html(sid);
-         $('#msgWin').css('display', '');
-      }
-      
-      // 홈 버튼 처리
-      $('#hbtn').click(function(){
-         $(location).attr('href', '/Project/main.cls');
-      });
-      
-      //로그인 처리
-      $('#pbtn').click(function() {
-         $('#frm1').attr('method', 'POST');
-         $('#frm1').attr('action', '/Project/member/joinProc.cls');
-         $('#frm1').submit();
-         
-      });
-      
-      // 아이디 찾기
-      $('#findid').click(function(){
-    	  $(location).attr('href','/Project/member/id_find.jsp');
-      })
-      
-      // 비밀번호 찾기
-      $('#findpw').click(function (){
-    	  $(location).attr('href','/Project/member/passFind.jsp');
-      })
-      
-      /*
-      $('#findid').mouseover(function(){
-    		$('#findid').addClass('overcolor');
-    		$('#findid').mouseout(function(){
-    			$('#findid').removeClass('overcolor');
-    		})
-      })
-      $('#findpw').mouseover(function(){
-    		$('#findpw').addClass('overcolor');
-    		$('#findpw').mouseout(function(){
-    			$('#findpw').removeClass('overcolor');
-    		})
-      })
-      */
-    
-   });
 </script>
 </head>
 <body>
    <p class="tip" id="hbtn">집으로 !!</p>
-<div class="cont">
+		<div class="cont">
    <form id="frm" name="frm">
-  <div class="form sign-in">
-    <h2>어서 오세용 드루왕</h2>
-    <label>
-      <span for="id">이메일</span>
-      <input type="email" id="id" name="id" />
-    </label>
-    <label>
-      <span for="pw">비밀번호</span>
-      <input type="password" id="pw" name="pw" />
-    </label>
+  		<div class="form sign-in">
+    		<h2>어서 오세용 드루왕</h2>
+    		<label>
+	      		<span for="id">이메일</span>
+	      		<input type="email" id="id" name="id" />
+    		</label>
+    		<label>
+			    <span for="pw">비밀번호</span>
+			    <input type="password" id="pw" name="pw" />
+		    </label>
    </form>   
-    <center>
-   <div style="width: 138px;">
-    <a href="#" style="text-decoration: none;"><p id="findpw" class="forgot-pass" style=" font-size: 12pt; font-family: Gentium Book Basic, Baekmuk Gentium Book Basic, UnGentium Book Basic, Apple Gothic, Latin font, sans-serif; " >Forgot password?</p></a>
+<center>
+   	<div style="width: 138px;">
+    	<a href="#" style="text-decoration: none;"><p id="findpw" class="forgot-pass" style=" font-size: 12pt; font-family: Gentium Book Basic, Baekmuk Gentium Book Basic, UnGentium Book Basic, Apple Gothic, Latin font, sans-serif; " >Forgot password?</p></a>
     </div>
-      <div style="width: 85px;">
-    <a href="#" style="text-decoration: none;"><p id="findid" class="forgot-pass" style=" font-size: 12pt; font-family: Gentium Book Basic, Baekmuk Gentium Book Basic, UnGentium Book Basic, Apple Gothic, Latin font, sans-serif; " >Forgot id?</p></a>
+    <div style="width: 85px;">
+    	<a href="#" style="text-decoration: none;"><p id="findid" class="forgot-pass" style=" font-size: 12pt; font-family: Gentium Book Basic, Baekmuk Gentium Book Basic, UnGentium Book Basic, Apple Gothic, Latin font, sans-serif; " >Forgot id?</p></a>
       </div>
       </center>
     <button type="button" class="submit" id="lbtn">Sign In</button>
@@ -137,13 +57,14 @@ $(document).ready(function() {
     <form id="frm1" name="frm1">
     <div class="form sign-up ">
       <label><span>이메일</span>
+      		<div class="w3-button w3-small w3-margin-left" id="idck">ID Check</div>
         <input type="email" name="email" id="email">
       </label>
       <label><span>비밀번호</span>
-        <input type="password" name="pwe" id="birth">
+        <input type="password" name="pwe" id="pwe">
       </label>
       <label><span>비밀번호확인</span>
-        <input type="password" name="pwa" id="bitrh">
+        <input type="password" name="pwa" id="pwa">
       </label>
       <label><span>이름</span>
         <input type="text" name="idx" id="idx">
@@ -167,7 +88,7 @@ $(document).ready(function() {
                            <option value="8" id="ab8">기타</option>
                         </select>
               </center>
-      <button type="button" class="submit" id='pbtn'>Sign Up</button>
+      <button type="button" class="submit" id="pbtn">Sign Up</button>
       </div>
       </form>
     </div>

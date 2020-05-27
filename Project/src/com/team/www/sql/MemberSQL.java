@@ -1,12 +1,14 @@
 package com.team.www.sql;
 
 public class MemberSQL {
+	public final int SEL_ID_CNT = 1000;
 	public final int SEL_LOGIN_CNT = 1001;
 	public final int SEL_ID_FIND = 1002;
 	public final int SEL_PW_FIND = 1003;
 	public final int SEL_INFO = 1004;
 	public final int SEL_COUNT = 1005;
 	public final int SEL_TEN = 1006;
+	public final int SEL_MAIN = 1007;
 	
 	public final int EIDT_PW_DATA = 2001;
 	public final int EIDT_PWE_DATA = 2002;
@@ -17,6 +19,15 @@ public class MemberSQL {
 	public String getSQL(int code) {
 		StringBuffer buff = new StringBuffer();
 		switch(code) {
+		case SEL_ID_CNT:
+			buff.append("SELECT ");
+			buff.append("	COUNT(*) cnt ");
+			buff.append("FROM ");
+			buff.append("	member ");
+			buff.append("WHERE ");
+			buff.append("	memid = ? ");
+			break;
+		
 		case SEL_LOGIN_CNT:
 			buff.append("SELECT ");
 			buff.append("	COUNT(*) cnt ");
@@ -56,18 +67,17 @@ public class MemberSQL {
 		
 		case SEL_INFO:
 			buff.append("SELECT ");
-			buff.append("	memid, phone, name, membir, c.carno ");
+			buff.append("	memid, phone, name, membir, c.carno carno ");
 			buff.append("FROM ");
-			buff.append("	member m, boss b, car c ");
+			buff.append("	member m, car c ");
 			buff.append("WHERE ");
-			buff.append("	m.memno = b.memno ");
-			buff.append("	AND m.carno = c.carno ");
+			buff.append("	m.carno = c.carno ");
 			buff.append("	AND memid = ? ");
 			break;
 			
 		case SEL_TEN:
 			buff.append("SELECT ");
-			buff.append("	p.bno bno, rd, bname ");
+			buff.append("	p.bno bno, rd, bname, bloc ");
 			buff.append("FROM ");
 			buff.append("	promotion p, boss b, ");
 			buff.append("	(SELECT ");
@@ -81,6 +91,13 @@ public class MemberSQL {
 			buff.append("	and p.bno = b.bno ");
 			buff.append("ORDER BY ");
 			buff.append(" rd DESC ");
+			break;
+			
+		case SEL_MAIN:
+			buff.append("SELECT ");
+			buff.append("	ifname,ifaddr ");
+			buff.append("FROM ");
+			buff.append("	info ");
 			break;
 			
 		case EIDT_PW_DATA:

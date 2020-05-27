@@ -34,9 +34,11 @@
 	
                            <a href="index.jsp" class="logo"><strong>Main page</strong></a>
                            <ul class="icons">
-                              <li><a href="/Project/login.jsp" class="w3-col"><b><span>SIGN IN</span></b></a></li>
+                           <c:if test="${empty SID}">
+                              <li><a href="/Project/member/login.jsp" class="w3-col"><b><span>SIGN IN</span></b></a></li>
+                           </c:if>
+                              <li><a href="/Project/member/logoutProc.cls" class="w3-col"><b><span>SIGN OUT</span></b></a></li>
                            </ul>
-                       
 				</header>
 
 				<head>
@@ -47,15 +49,46 @@
 <script type="text/javascript">
         $(function(){
         	$('#golbtn').click(function(){
-        		$(location).attr('href','/Project/qna/qnaList.jsp');
+        		$(location).attr('href','/Project/qna/qnaList.cls');
         	});
         	
         	$('#wcbtn').click(function(){
-        		$(location).attr('href','/Project/qna/qnaList.jsp');
+        		$(location).attr('href','/Project/qna/qnaList.cls');
         	});
         	
         	$('.dtlogo').click(function(){
         		$(location).attr('href','/Project/main.cls');
+        	});
+        	
+        	$('#sbbtn').click(function(){
+        		alert('글등록');
+        		var qtt = document.getElementById('qtt2').value;
+        		var qip = document.getElementById('qip2').value;
+        		alert(qtt);
+        		alert(qip);
+        		$('#qtt').val(qtt);
+        		$('#qbd').val(qip);
+        		$('#qnaWForm').attr('action', '/Project/qna/qnaProc.cls');
+        		$('#qnaWForm').submit();
+        	});
+        	
+        	$('#modibtn').click(function(){
+        		alert('눌렸습니다');
+        		var qtt = document.getElementById('qtt4').value;
+        		var qip = document.getElementById('qip4').value;
+        		$('#qqtt').val(qtt);
+        		$('#qqbd').val(qip);
+        		$('#qnaForm').attr('action', '/Project/qna/qnaModiProc.cls');
+        		$('#qnaForm').submit();
+        	});
+        	$('#ansmodibtn').click(function(){
+        		alert('눌렸습니다');
+        		var qtt = document.getElementById('qtt3').value;
+        		var qip = document.getElementById('qip3').value;
+        		$('#qqtt').val(qtt);
+        		$('#qqbd').val(qip);
+        		$('#qnaForm').attr('action', '/Project/qna/qnaModiProc.cls');
+        		$('#qnaForm').submit();
         	});
         });
     </script>
@@ -64,32 +97,73 @@
 				<br> <b><font size="6" color="gray">글쓰기</font></b> <br>
 
 				<form method="post" action="" name="qnaForm" id="qnaForm">
-					<input type="hidden" name="board_id"
-						value="${sessionScope.sessionID}">
-					<table width="700" border="3" bordercolor="lightgray"
-						align="center">
+					<input type="hidden" id="sid" name="id" value="${SID}">
+					<input type="hidden" id="qqno" name="qqno" value="${qno}">
+					<input type="hidden" id="qqtt" name="qqtt">
+					<input type="hidden" id="qqbd" name="qqbd">
+				</form>
+				<form method="post" action="" name="qnaWForm" id="qnaWForm">
+					<input type="hidden" id="sid" name="id" value="${SID}">
+					<input type="hidden" id="qno" name="qno" value="${qno}">
+					<input type="hidden" id="qtt" name="qtt">
+					<input type="hidden" id="qbd" name="qbd">
+				</form>
+					<table width="700" border="3" bordercolor="lightgray" align="center">
+					<c:if test="${empty qno}">
 						<tr>
 							<td id="title">작성자</td>
-							<td>${sessionScope.sessionID}</td>
+							<td>${NAME}</td>
 						</tr>
 						<tr>
 							<td id="title">제 목</td>
-							<td><input name="board_subject" type="text" size="70"
-								maxlength="100" value="" /></td>
+							<td>
+								<input name="qtt" type="text" size="70"maxlength="100" id="qtt2"/>
+							</td>
 						</tr>
 						<tr>
 							<td id="title">내 용</td>
-							<td><textarea name="board_content" cols="72" rows="20"></textarea>
+							<td>
+								<textarea name="qip" cols="72" rows="20" id="qip2"></textarea>
 							</td>
 						</tr>
-
+					</c:if>
+					<c:if test="${not empty qno}">
+							<tr>
+								<td id="title">작성자</td>
+								<td>${DETAIL.name}</td>
+							</tr>
+							<tr>
+								<td id="title">제 목</td>
+								<td>
+									<input name="qtt" type="text" size="70"maxlength="100" id="qtt4" value="${DETAIL.qtt}"/>
+								</td>
+							</tr>
+							<tr>
+								<td id="title">내 용</td>
+								<td>
+									<textarea name="qip" cols="72" rows="20" id="qip4">${DETAIL.qip}</textarea>
+								</td>
+							</tr>
+					</c:if>
 						<tr align="center" valign="middle">
-							<td colspan="5"><input type="reset" value="작성취소" id="wcbtn"> <input
-								type="submit" value="등록"> <input type="button"
-								value="목록" id="golbtn"></td>
+						<!-- 글 수정 작업시 아래 -->
+						<c:if test="${not empty qno}">
+							<td colspan="5">
+								<input type="reset" value="작성취소" id="wcbtn"> 
+								<input type="submit" value="글수정" id="modibtn"> 
+								<input type="button" value="목록" id="golbtn">
+							</td>
+						</c:if>
+						<!-- 글 작성 작업시 아래 -->
+						<c:if test="${empty qno}">
+						<td colspan="5">
+								<input type="reset" value="작성취소" id="wcbtn"> 
+								<input type="submit" value="등록" id="sbbtn"> 
+								<input type="button" value="목록" id="golbtn">
+							</td>
+						</c:if>
 						</tr>
 					</table>
-				</form>
 			</div>
 		</div>
 		<!-- Sidebar -->

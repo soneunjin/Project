@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.team.www.DB.WebDBCP;
 import com.team.www.sql.MemberSQL;
+import com.team.www.vo.InfoVO;
 import com.team.www.vo.MemberVO;
 
 
@@ -22,6 +23,35 @@ public class MemberDAO {
 		db = new WebDBCP();
 		mSQL = new MemberSQL();
 	}
+	
+	// 회원 아이디 카운트 데이터베이스작업 전담 처리 함수
+		public int getIdCnt(String id) {
+			// 반환값 변수 만들고
+			int cnt = 0;
+			// 1. 커넥션 얻어오고
+			con = db.getCon();
+			// 2. 질의명령 가져오고
+			String sql = mSQL.getSQL(mSQL.SEL_ID_CNT);
+			// 3. pstmt 가져오고
+			pstmt = db.getPSTMT(con, sql);
+			try {
+				// 4. 질의명령 완성하고
+				pstmt.setString(1, id);
+				// 5. 질의명령 보내고 결과받고
+				rs = pstmt.executeQuery();   // select질의명령은 rs로 받는다
+				// 6. 결과에서 데이터 꺼내고
+				rs.next();
+				cnt = rs.getInt("cnt");
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				db.close(rs);
+				db.close(pstmt);
+				db.close(con);
+			}
+			// 7. 꺼낸 데이터 반환해주고
+			return cnt;
+		}
 	
 	// 로그인 데이터베이스 처리 전담 함수
 	public int getLoginCnt(String id, String pw) {
@@ -181,8 +211,8 @@ public class MemberDAO {
 			rs = pstmt.executeQuery();
 			rs.next();
 			mVO.setMemid(rs.getString("memid"));
-			mVO.setName(rs.getString("name"));
 			mVO.setPhone(rs.getString("phone"));
+			mVO.setName(rs.getString("name"));
 			mVO.setMembir(rs.getString("membir"));
 			mVO.setCarno(rs.getInt("carno"));
 		} catch(Exception e) {
@@ -240,6 +270,7 @@ public class MemberDAO {
 		return cnt;
 	}
 	
+	// 탑 10 통계 전담 처리 함수
 	public ArrayList<MemberVO> getTen() {
 		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
 		
@@ -252,7 +283,33 @@ public class MemberDAO {
 				MemberVO mVO = new MemberVO();
 				mVO.setBname(rs.getString("bname"));
 				mVO.setRd(rs.getDouble("rd"));
+				mVO.setBloc(rs.getString("bloc"));
 				list.add(mVO);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close(rs);
+			db.close(stmt);
+			db.close(con);
+		}
+		return list;
+	}
+	
+	// 메인 데이터베이스 정보 조회함수
+	public ArrayList<InfoVO> getDate() {
+		ArrayList<InfoVO> list = new ArrayList<InfoVO>();
+		
+		con = db.getCon();
+		String sql = mSQL.getSQL(mSQL.SEL_MAIN);
+		stmt = db.getSTMT(con);
+		try {
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				InfoVO iVO = new InfoVO();
+				iVO.setIfname(rs.getString("ifname"));
+				iVO.setIfaddr(rs.getString("ifaddr"));
+				list.add(iVO);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();

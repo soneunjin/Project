@@ -11,8 +11,7 @@ public class IdFindProc implements ClsController {
 
 	@Override
 	public String exec(HttpServletRequest req, HttpServletResponse resp) {
-		String view = "/member/id_result.jsp";
-		
+		String view = "/member/id_find.jsp";
 		// 파라미터 가져오고
 		String sid = req.getParameter("name");
 		String phone3 = req.getParameter("phone");

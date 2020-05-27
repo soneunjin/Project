@@ -34,7 +34,10 @@
 				  
                            <a href="/Project/main/main.jsp" class="logo"><strong>Main page</strong></a>
                            <ul class="icons">
+                           <c:if test="${empty SID}">
                               <li><a href="/Project/member/login.jsp" class="w3-col"><b><span>SIGN IN</span></b></a></li>
+                           </c:if>
+                              <li><a href="/Project/member/logoutProc.cls" class="w3-col"><b><span>SIGN OUT</span></b></a></li>
                            </ul>
                       
 				</header>
@@ -46,20 +49,61 @@
 
 <script type="text/javascript">
         $(function(){
+        	
         	$('#wbtn').click(function(){
         		alert('글쓰기 창으로 이동합니다');
-        		$(location).attr('href','/Project/qna/qnaWrite.jsp');
+        		$('#frm').attr('action','/Project/qna/qnaWrite.cls');
+        		$('#frm').submit();
         	});
+        	
         	$('.dtlogo').click(function(){
         		alert('홈으로 드루와~');
         		$(location).attr('href', '/Project/main.cls');
         	});
+        	
+        	$('.ebtn').siblings().click(function(){
+        		alert('상세보기 페이지로 이동합니다');
+        		var sid = $('#sid').val();
+        		alert(sid);
+        		var qno = $(this).parent().attr('id');
+        		$('#qqno').val(qno);
+        		$('#sid1').val(sid);
+        		$('#dfrm').attr('action', '/Project/qna/qnaDetail.cls');
+        		$('#dfrm').submit();
+        	});
+        	
+        	$('.pbtn').click(function(){
+        		var bstr = $(this).html();
+        		if(bstr == 'PRE'){
+        			$('#nowPage').val('${PAGE.startPage -1}');
+        		} else if(bstr == 'NEXT'){
+        			$('#nowPage').val('${PAGE.endPage +1}');
+        		} else {
+        			$('#nowPage').val(bstr);
+        		}
+        		$('#frm').attr('action','/Project/qna/qnaList.cls');
+    			$('#frm').submit();
+        	});
+        	
+        	$('.search').click(function(){
+        		var input = $('#input').val();
+        		alert(input);
+        		$('#searchinput').val(input);
+        		$('#searchList').attr('action', '/Project/qna/qnaSearch.cls');
+        		$('#searchList').submit();
+        	});
         });
     </script>
-
-				</head>
-				<body >
-
+    </head>
+	<body>
+				<form method="post" action="" id="frm">
+					<input type="hidden" name="nowPage" id="nowPage" value="${param.nowPage}">
+					<input type="hidden" name="sid" id="sid" value="${SID}">
+				</form>
+				<form method="post" action="" id="dfrm">
+					<input type="hidden" name="sid" id="sid1" value="">
+					<input type="hidden" name="qqno" id="qqno">
+				</form>
 					<div id="wrap" >
 						<br>
 						<div id="topForm">
@@ -75,79 +119,73 @@
 									<td>제목</td>
 									<td>작성자</td>
 									<td>작성일</td>
+									<td>답변상태</td>
 								</tr>
-								<tr>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-									<td>1</td>
-								</tr>
-
+									<c:forEach var="data" items="${LIST}" varStatus="status">
+									<tr id="${data.qno}">
+										<td class="ebtn">${data.qno}</td>
+										<td>${data.qtt}</td>
+										<td>${data.name}</td>
+										<td>${data.qDate}</td>
+										<c:if test="${data.ok eq 'ok'}">
+											<td>답변완료</td>
+										</c:if>
+										<c:if test="${data.ok ne 'ok'}">
+											<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+										</c:if>
+									</tr>
+									</c:forEach>
 							</table>
 						</div>
 						<div class="w3-right">
+						<c:if test="${not empty SID}">
 							<input type="button" value="글쓰기" id="wbtn">
+						</c:if>
 						</div>
-						<div class="w3-row"><p></p></div>
+						<div class="w3-row" style="margin-bottom: -50px;"><p></p></div>
+						<div class="w3-center w3-margin-left w3-padding-left">
+				<div class="w3-center w3-bar w3-border">
+					<c:if test="${PAGE.startPage lt 4 }">
+						<span class="w3-bar-item w3-light-gray">PRE</span>
+					</c:if>
+					<c:if test="${PAGE.startPage ge 4 }">
+						<span class="w3-bar-item w3-button w3-hover-blue pbtn">PRE</span>
+					</c:if>
+						<c:forEach var="pageNo" begin="${PAGE.startPage}" end="${PAGE.endPage}">
+							<span class="w3-bar-item w3-border-left w3-button w3-hover-blue pbtn">${pageNo}</span>
+						</c:forEach>
+						<c:if test="${PAGE.endPage ne PAGE.totalPage}">
+							<span class="w3-bar-item w3-border-left w3-button w3-hover-blue pbtn">NEXT</span>
+						</c:if>
+						<c:if test="${PAGE.endPage eq PAGE.totalPage}">
+							<span class="w3-bar-item w3-border-left w3-light-gray">NEXT</span>
+						</c:if>
+				</div>
+			</div>
 						<div id="pageForm">페이지 번호</div>
 						<br>
 						
 						<br>
 						<div class="w3-col w-300" id="searchForm" >
-							<form id="botform">
 							
 							<!-- 꼭 필요할까요??? 셀렉트박스 -->
+							<form method="post" action="" id="searchList">
+								<input type="hidden" name="nowPage" id="nowPage" value="${param.nowPage}">
+								<input type="hidden" name="input" id="searchinput">
 							<div class="w3-col m2">
-								<select name="opt" style="margin: 10px;">
-									<option value="0">제목</option>
-									<option value="1">내용</option>
-									<option value="2">제목+내용</option>
-									<option value="3">글쓴이</option>
+								<select name="type" style="margin: 10px;">
+									<option value="qtt">제목</option>
+									<option value="qip">내용</option>
+									<option value="name">작성자</option>
 								</select> 
 							</div>
 							<!-- ------------------------ -->
 							
-							<div class="w3-col m6">
-								<input type="text" size="20" name="condition" style="margin: 10px;" />
-							</div>
 							<div class="w3-col m4">
-								<input  type="submit" value="search" style="margin: 10px;" />
+								<input id="input" type="text" size="15" name="condition" style="margin: 10px;" />
+							</div>
+							<div class="w3-col m2">
+								<input class="search" type="submit" value="search" style="margin: 10px;" />
 							</div>
 							</form>
 						</div>
@@ -167,11 +205,11 @@
 				<!-- Menu -->
 				<nav id="menu">
 					<header class="major w3-padding-top">
-						<img class="dtlogo" src="../images/main.png" width="300px"
-							height="auto"> <a href="main.jsp"><h2>menu</h2></a>
+						<img class="dtlogo" src="../images/main.png" width="300px"height="auto"> 
+						<!-- 얘는 어케할까??? -->
+						<a href="main.jsp"><h2>menu</h2></a>
 					</header>
 					<ul>
-						<li><a href="index.html">모른당X</a></li>
 						<li><a href="elements.html">팝니당$</a></li>
 						<li><span class="opener">오세용~</span>
 							<ul>

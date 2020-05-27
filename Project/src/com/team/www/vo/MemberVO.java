@@ -6,11 +6,17 @@ import java.text.*;
 public class MemberVO {
 	private int memno, carno;
 	private double rd;
-	private String memid, mempw, bno, name, phone, sDate, membir, bname;
+	private String memid, mempw, bno, name, phone, sDate, membir, bname, bloc;
 	private Date joinDate;
 	private Time joinTime;
 	
 	
+	public String getBloc() {
+		return bloc;
+	}
+	public void setBloc(String bloc) {
+		this.bloc = bloc;
+	}
 	public double getRd() {
 		return rd;
 	}

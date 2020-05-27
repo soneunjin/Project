@@ -6,65 +6,13 @@
 <meta charset="UTF-8">
 <title></title>
 <link rel="stylesheet" href="/Project/css/w3.css">
+<link rel="stylesheet" href="/Project/css/passFind.css">
 <script type="text/javascript" src="/Project/js/jquery-3.5.0.min.js"></script>
+<script type="text/javascript" src="/Project/js/passFind.js"></script>
 <style>
-	tr {
- border: 0px solid none;
-}
-k:hover {
- text-decoration: none;
- color: #9354ED
-}
-
-
 </style>
 <script type="text/javascript">
-/*
-// 클릭시 인증번호 출력
-$('#sbtn').click(function(){
-		$('#clickEvt').css('display','inline-block');
-	})
-// 10px, 10px 상자에 마우스 올리면 인증번호창 활성화
-$("#clickEvt").mouseover(function(){
-    $("#clickEvt").addClass("firstDiv");
-});
- // 인증번호 입력시 button div 생성
-$('#chkey').keyup(function(){
-	$('#clickEvt').addClass('he-10');
-});
-$('#cbtn').click(function(){
-	$(location).attr('href', '/Project/main.cls');
-});
-*/
-	
-	$(document).ready(function () {
-		
-		// 아이디 찾기 버튼
-		$('#sbtn').click(function () {
-			 // 1. 데이터 읽고
-	         var sid = $('#name').val();
-	         var spw = $('#email').val();
-	         // 2. 유효성 검사하고
-	         if(!sid){
-	            $('#name').focus();
-	            alert('올바른 이름이 아닙니다.')
-	            return;
-	         }
-	         if(!spw){
-	            $('#email').focus();
-	            alert('올바른 아이디가 아닙니다.')
-	            return;
-	         }
-			$('#frm').submit();
-		});
-		
-		// 취소버튼
-		$('#cbtn').click(function() {
-			$(location).attr('href','/Project/member/login.jsp');
-		});
-	});
-
-	 </script>
+</script>
 </head>
 <body>
 	<table width="1330px" height="430px" align="center">

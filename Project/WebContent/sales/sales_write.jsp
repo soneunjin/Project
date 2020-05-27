@@ -21,6 +21,17 @@
 
 <script type="text/javascript" src="/Project/js/jquery-3.5.0.min.js"></script>
 <script type="text/javascript" src="/Project/js/login.js"></script>
+<script>
+	$(document).ready(function(){
+	   $('#save').click(function(){
+	      //데이터 유효성 체크
+	      $('#frm').submit();
+	   });
+	   $('#list').click(function(){
+		   $(location).attr('href', '/Project/sales/sales.cls');
+	   });
+   });
+</script>
 </head>
 <body class="is-preload">
 
@@ -33,10 +44,15 @@
 				<header id="header">
 
 					<a href="index.jsp" class="logo"><strong>Main page</strong></a>
-					<ul class="icons">
-						<li><a href="/Project/login.jsp" class="w3-col"><b><span>SIGN
-										IN</span></b></a></li>
-					</ul>
+					<div class="icons">
+                  		<a href="/Project/login.jsp" class="">
+                  	<c:if test="${empty SID}">
+						<div class="btn w3-button" id="login"><b><span>SIGN IN</span></b></a></div>
+					</c:if>
+					<c:if test="${not empty SID}">
+						<div class="btn w3-col" id="logout"><b><span>SIGN OUT</span></b></a></div>
+					</c:if>
+             	  </div>
 
 				</header>
 
@@ -47,54 +63,62 @@
 				</head>
 				<br> <b><font size="6" color="gray">글쓰기</font></b> <br>
 
-				<form method="post" action="BoardWriteAction.bo" name="boardForm"
+				<form method="post" action="/Project/sales/sales_writeProc.cls" name="boardForm" id="frm"
 					enctype="multipart/form-data">
-					<input type="hidden" name="board_id"
-						value="${sessionScope.sessionID}">
+					<input type="hidden" name="board_id">
 					<table width="700" border="3" bordercolor="lightgray"
 						align="center">
 						<tr>
-							<td id="title">작성자</td>
-							<td>${sessionScope.sessionID}</td>
+							<td>작성자</td>
+							<td name="memid">${SID}</td>
 						</tr>
 						<tr>
-							<td id="title">제 목</td>
-							<td><input name="board_subject" type="text" size="70"
-								maxlength="100" value="" /></td>
-						</tr>
-						<tr>
-							<td id="title">내 용</td>
-							<td><textarea name="board_content" cols="72" rows="20"></textarea>
+							<td>분 류</td>
+							<td>
+							<div>
+								<select name="cate">
+									<option value="eat">음식점
+									<option value="cth">자동차극장
+									<option value="atc">캠핑장
+									<option value="etc">기타
+								</select>
+							</div>
 							</td>
 						</tr>
 						<tr>
-							<td id="title">파일첨부</td>
-							<td><input type="file" name="board_file" /></td>
+							<td>제 목</td>
+							<td><input id="ptt" name="ptt" type="text" size="50"
+								maxlength="100" value="" /></td>
 						</tr>
-
-						<tr align="center" valign="middle">
-							<td colspan="5"><input type="reset" value="작성취소"> <input
-								type="submit" value="등록"> <input type="button"
-								value="목록"></td>
+						<tr>
+							<td >내 용</td>
+							<td><textarea id="pbd" name="pbd" cols="72" rows="20"></textarea>
+							</td>
 						</tr>
 					</table>
+						<div>
+							<h3>파일첨부</h3>
+							<hr>
+							<input type="file" name="file"  style="margin: 5px;"><br>
+						</div>
 				</form>
+						<div style="position:relative; left: 40%;">
+							<input type="button" id="save" value="등록">
+							<input type="button" id="list" value="목록"></td>
+						</div>
+
 			</div>
 		</div>
-
-
-
-		<!-- Sidebar -->
 		<div id="sidebar">
 			<div class="inner">
-				<!-- Menu -->
+				<!-- menu -->
 				<nav id="menu">
 					<header class="major">
-						<a href="/Project/index.jsp"><h2>MainPage</h2></a>
+						<a href="/Project/main.cls"><h2>MainPage</h2></a>
 					</header>
 					<ul>
-						<li><a href="index.html">여기는 뭐지?</a></li>
 						<li><a href="/Project/sales/sales.jsp">팝니당</a></li>
+						<li><a href="/Project/review/review.cls">리뷰당</a></li>
 						<li><span class="opener">가세용</span>
 							<ul>
 								<li><a href="#">D.T 점</a></li>
