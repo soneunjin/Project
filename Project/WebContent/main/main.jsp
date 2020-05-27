@@ -133,8 +133,8 @@
 												<li><a href="#"></a></li>
 											</ul>
 										</li>
-										<li><a href="/Project/qna/qnaList.jsp">놀러왕!</a></li>
-										<li><a href="/Project/board/board.jsp">물어봥?</a></li>
+										<li><a href="/Project/board/board.cls">놀러왕!</a></li>
+										<li><a href="/Project/qna/qnaList.cls">물어봥?</a></li>
 										<!--
 										<li>
 											 <span class="opener">Another Submenu</span>
